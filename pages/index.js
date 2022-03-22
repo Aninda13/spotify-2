@@ -1,12 +1,12 @@
+import Center from '../components/Center'
 import Sidebar from '../components/Sidebar'
 
 export default function Home() {
   return (
-    <div className="">
-      <h1> This is a Spotify 2.0 Build</h1>
-      <main>
+    <div className="bg-black h-screen overflow-hidden">
+      <main className='flex'>
         <Sidebar />
-        {/* Center */}
+        <Center />
       </main>
       <div> { /* Player */ } </div>
     </div>
