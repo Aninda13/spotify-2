@@ -20,7 +20,7 @@ export async function middleware(req){
     //     return NextResponse.redirect("/login");
     // }
     if (!token && pathname !== '/login'){
-        const url = request.nextUrl.clone();
+        const url = req.nextUrl.clone();
         url.pathname = '/login';
         return NextResponse.rewrite(url);
     }
