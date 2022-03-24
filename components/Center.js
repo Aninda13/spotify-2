@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { shuffle } from "lodash";
 import {useState, useEffect} from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { playlistIdStateAtom, playlistStateAtom } from "../atoms/playlistAtom";
+import { playlistIdStateAtom, playlistStateAtom, colorStateAtom } from "../atoms/playlistAtom";
 import useSpotify from "../hooks/useSpotify";
 import Songs from "./Songs";
 
@@ -21,7 +21,8 @@ const colors = [
 
 function Center() {
     const {data: session } = useSession()
-    const [color, setColor ] = useState(null)
+    // const [color, setColor ] = useState(null)
+    const [color, setColor] = useRecoilState(colorStateAtom)
     const spotifyApi = useSpotify();
     const playlistId = useRecoilValue(playlistIdStateAtom);
     const [playlist, setPlaylist] = useRecoilState(playlistStateAtom);
@@ -45,7 +46,7 @@ function Center() {
     //     })
     // })
     // console.log("You clicked coming from center", playlist);
-
+    // console.log("color from center", color);
   return (
     <div className="flex-grow h-screen overflow-y-scroll">
         <header className="absolute top-5 right-8">

@@ -12,3 +12,8 @@ export const playlistIdStateAtom = atom({
     key: "playlistIdState",
     default: "6zQo5HVhHBCT4rKmqsOZi9",
 })
+
+export const colorStateAtom = atom({
+    key: "colorState",
+    default: null,
+});
