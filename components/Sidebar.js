@@ -9,17 +9,17 @@ import {
 import { signOut, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from "recoil";
-import { playlistIdState } from "../atoms/playlistAtom";
+import { playlistIdStateAtom } from "../atoms/playlistAtom";
 import useSpotify from '../hooks/useSpotify';
 
 function Sidebar() {
     const spotifyApi = useSpotify();
     const { data: session, status } = useSession();
     const [playlists, setPlaylists ] = useState([]);
-    const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
+    const [playlistId, setPlaylistId] = useRecoilState(playlistIdStateAtom);
 
 
-    // console.log('You Picked playList >>>', playlistId)
+    console.log('You Picked playList >>>', playlistId)
 
     useEffect(() => {
         if (spotifyApi.getAccessToken()){
@@ -29,7 +29,7 @@ function Sidebar() {
         }
     }, [session, spotifyApi]);
 
-    // console.log(playlists);
+    console.log(playlists);
     // console.log(playlists.length);
     
     return (

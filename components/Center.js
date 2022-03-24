@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { shuffle } from "lodash";
 import {useState, useEffect} from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { playlistIdState, playlistState } from "../atoms/playlistAtom";
+import { playlistIdStateAtom, playlistStateAtom } from "../atoms/playlistAtom";
 import useSpotify from "../hooks/useSpotify";
 
 const colors = [
@@ -22,19 +22,29 @@ function Center() {
     const {data: session } = useSession()
     const [color, setColor ] = useState(null)
     const spotifyApi = useSpotify();
-    const playlistId = useRecoilValue(playlistIdState);
-    const [playlist, setPlaylist] = useRecoilState(playlistState);
+    const playlistId = useRecoilValue(playlistIdStateAtom);
+    const [playlist, setPlaylist] = useRecoilState(playlistStateAtom);
     useEffect(() => {
         setColor(shuffle(colors).pop())
     }, [playlistId]);
 
     useEffect(() => {
-        spotifyApi.getPlaylist(playlistId).then((data)=>{
+        spotifyApi.getPlaylist(playlistId)
+        .then((data)=>{
             setPlaylist(data.body)
         }).catch((err) => console.log("something went pretty Wrong", err))
-    }, [spotifyApi, playlistId])
+    }, [spotifyApi, playlistId]);
     // console.log('You clicked on certain playlist >>>>' , playlistId)
-    console.log(playlist)
+    // console.log("Curret PlaylistID: " , playlistId)
+    // useEffect(() => {
+    //     spotifyApi.getPlaylist('37i9dQZF1E4kGXrSFPHnA3').then((data)=>{
+    //         console.log(data)
+    //     }).catch((err) => {
+    //         console.log("New error found from getplaylist: ", err)
+    //     })
+    // })
+    console.log("You clicked coming from center", playlist);
+
   return (
     <div className="flex-grow">
         <header className="absolute top-5 right-8">
@@ -50,10 +60,11 @@ function Center() {
         <section className={`flex items-end space-x-7 bg-gradient-to-b
          to-black ${color} h-80 text-white padding-8`}
          >
-             <img className="h-60 w-60 shadow-2xl" 
-             src={playlistId?.images?.[0]?.url} 
+             <img className="h-44 w-44 shadow-2xl" 
+             src={playlist?.images?.[0]?.url} 
              alt="" />
-            <h1> Hello </h1>
+            <h1> Hello:</h1>
+            {console.log(playlistId)}
         </section>
     </div>
   )

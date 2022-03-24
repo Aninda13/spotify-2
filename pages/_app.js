@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps} }) {
           <Component {...pageProps} />
        </RecoilRoot>
     </SessionProvider>
-  )
+  );
 }
 
 export default MyApp
