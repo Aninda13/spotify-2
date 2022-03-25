@@ -1,19 +1,13 @@
 import useSpotify from "../hooks/useSpotify"
 import { millisToMinutesAndSeconds } from "../lib/time";
-import {colorStateAtom} from "../atoms/playlistAtom";
-import { useRecoilState, useRecoilValue } from "recoil";
 import { useEffect, useState } from 'react';
 
 function Song({order, track}) {
     const spotifyApi = useSpotify();
-    const color = useRecoilState(colorStateAtom)
-    const [newColor, setColor] = useState(null)
-    useEffect(() => {
-        setColor('bg-'+color[0].replace('from-', ''))
-    } , [newColor])
-    console.log("color: ", newColor)
+
+
   return (
-    <div className={`grid grid-cols-2 px-5 py-4  hover:${'bg-'+color[0].replace('from-', '')} text-gray-500 `}>
+    <div className={`grid grid-cols-2 px-5 py-4  hover:bg-gray-900 text-gray-500 `}>
         <div className="flex items-center space-x-4">
             <p> {order + 1}</p>
             <img className="h-10 w-10" src={track.track.album.images[0]?.url} alt="" />
