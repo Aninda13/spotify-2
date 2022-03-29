@@ -86,8 +86,8 @@ function Player() {
             // but only when the isPlay is true 
             // to be fixed in the future */}
             {/* {isPlaying ? 
-            (< PauseIcon classname="button" />):
-            (< PlayIcon className="button h-10 w-10"/>)} */}
+            (< PauseIcon onClick={handlePlayPause} classname="button h-10 w-10" />):
+            (< PlayIcon onClick={handlePlayPause} className="button h-10 w-10"/>)} */}
 
             <PlayIcon onClick={handlePlayPause} className='button h-10 w-10'/>
 
